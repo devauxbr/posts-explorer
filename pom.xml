@@ -23,11 +23,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- dependency versions -->
-        <picocli-spring-boot.version>0.2.0</picocli-spring-boot.version>
         <lombok.version>1.18.12</lombok.version>
+        <querydsl.version>4.3.1</querydsl.version>
         <guava.version>29.0-jre</guava.version>
-        <junit.version>5.6.2</junit.version>
+        <junit.version>4.12</junit.version>
         <assertj.version>3.16.1</assertj.version>
+        <testcontainers.version>1.14.3</testcontainers.version>
 
         <!-- plugin versions -->
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
@@ -54,6 +55,13 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

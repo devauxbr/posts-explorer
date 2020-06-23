@@ -1,4 +1,4 @@
-package io.devaux.postexplorer.sync.client;
+package io.devaux.postexplorer.service.sync.client;
 
 import io.devaux.postexplorer.model.Post;
 import org.springframework.beans.factory.annotation.Value;
