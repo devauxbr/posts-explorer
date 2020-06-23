@@ -3,7 +3,7 @@ package io.devaux.postexplorer;
 import io.devaux.postexplorer.model.Post;
 import io.devaux.postexplorer.persistence.PostRepository;
 import io.devaux.postexplorer.service.PostService;
-import io.devaux.postexplorer.service.sync.PostsSynchronizer;
+import io.devaux.postexplorer.service.sync.PostSynchronizer;
 import io.devaux.postexplorer.mongo.MongoDbContainer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,28 +11,37 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpMethod.GET;
 
 /**
  * Integration tests that spin up a MongoDB instance with Testcontainers to test in "real conditions"
  */
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = IntegrationTest.MongoDbInitializer.class)
 @ExtendWith(SpringExtension.class)
 public class IntegrationTest {
 
+    @LocalServerPort
+    private int port;
+
     @Autowired
-    private PostsSynchronizer synchronizer;
+    private TestRestTemplate restTemplate;
+
+    @Autowired
+    private PostSynchronizer synchronizer;
 
     @Autowired
     private PostRepository repository;
@@ -65,6 +74,18 @@ public class IntegrationTest {
                 .sorted(comparing(Post::getTitle))
                 .limit(50)
                 .collect(toList());
+        assertThat(actual).containsExactly(expected.toArray(new Post[0]));
+    }
+
+    @Test
+    void restControllerShouldServeServiceResults() {
+        List<Post> actual = restTemplate
+                .exchange("http://localhost:" + port + "/top-50-posts", GET, null,
+                        new ParameterizedTypeReference<List<Post>>() {
+                        })
+                .getBody();
+
+        List<Post> expected = service.findTop50OrderByTitle();
         assertThat(actual).containsExactly(expected.toArray(new Post[0]));
     }
 

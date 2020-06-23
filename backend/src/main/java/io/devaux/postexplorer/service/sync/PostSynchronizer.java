@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PostsSynchronizer {
+public class PostSynchronizer {
     private final PostRepository repository;
     private final PostsRestClient client;
 
