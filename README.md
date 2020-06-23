@@ -1,4 +1,4 @@
-# POI Finder
+# Posts Explorer
 
 This is a small Java 11 [Spring-Boot](https://spring.io/projects/spring-boot) and [Angular](https://angular.io/)
 based project that fetch posts from [this URL](https://jsonplaceholder.typicode.com/posts), stores them in a MongoDB 
