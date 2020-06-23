@@ -1,4 +1,4 @@
-package io.devaux.postexplorer.service.sync.mongo;
+package io.devaux.postexplorer.mongo;
 
 import org.testcontainers.containers.GenericContainer;
 
