@@ -80,7 +80,7 @@ public class IntegrationTest {
     @Test
     void restControllerShouldServeServiceResults() {
         List<Post> actual = restTemplate
-                .exchange("http://localhost:" + port + "/top-50-posts", GET, null,
+                .exchange("http://localhost:" + port + "/api/top-50-posts", GET, null,
                         new ParameterizedTypeReference<List<Post>>() {
                         })
                 .getBody();

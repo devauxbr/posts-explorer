@@ -1,2 +1,7 @@
 posts:
   url: https://jsonplaceholder.typicode.com/posts
+
+server:
+  servlet:
+    # Allows to create rule to reverse-proxying requests from frontend to backend
+    contextPath: /api
