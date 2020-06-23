@@ -15,7 +15,7 @@ guidelines from Robert C. Martin.
 - Java 11+
 - Maven 3.6+
 - [Docker](https://www.docker.com/)
-- [docker-compose](https://docs.docker.com/compose/)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
 Simplest install method for Java and Maven in UNIX environments is via [SDKMAN](https://sdkman.io/)
 
@@ -29,15 +29,17 @@ In the root directory of this project, simply run :
 ```bash
 mvn clean install
 ```
-This will compile, run tests, package and build frontend and backend docker images (this may take a few minutes)
+This will compile, run tests, package and build frontend and backend docker images (this may take a few minutes,
+especially for frontend on first build)
 
 ## Run
 
 Once the project is built, run :
 ```bash
-docker-compose up
+docker-compose -f docker-compose.yml -f mongodb.yml up
 ```
-Wait a few seconds for the components (mongo, backend and fronted) to start, then open your browser at http://localhost:8000
+Wait a few seconds for the components (mongo, backend and fronted) to start. When `Posts sync job done.` is shown
+ is the logs, you can open your browser at http://localhost:8000
 
 ## Development
 
