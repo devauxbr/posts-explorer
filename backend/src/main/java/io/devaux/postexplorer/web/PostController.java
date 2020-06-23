@@ -16,6 +16,7 @@ public class PostController {
 
     @GetMapping("/top-50-posts")
     public List<Post> getTop50Posts() {
+        System.out.println("yo");
         return service.findTop50OrderByTitle();
     }
 }

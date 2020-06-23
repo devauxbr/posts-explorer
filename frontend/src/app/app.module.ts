@@ -2,10 +2,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlexLayoutModule,
     MatTableModule,
     BrowserAnimationsModule,
   ],

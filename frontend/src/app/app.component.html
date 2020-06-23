@@ -1,4 +1,6 @@
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
+<p *ngIf="loading">Loading...</p>
+
+<table mat-table [dataSource]="data" class="mat-elevation-z8" *ngIf="!loading">
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef class="id-header"> ID </th>

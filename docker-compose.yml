@@ -1,0 +1,11 @@
+version: '2'
+services:
+
+  backend:
+    image: devauxbr/posts-explorer-backend
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongodb
+  frontend:
+    image: devauxbr/posts-explorer-frontend
+    ports:
+    - 8000:80

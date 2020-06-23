@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     this.loading = true;
     this.postClient.getTop50Posts().subscribe(posts => {
       this.data = posts;
+      this.loading = false;
     });
   }
 
